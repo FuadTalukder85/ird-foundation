@@ -1,10 +1,10 @@
+import Menu from "@/components/Menu";
 import React from "react";
 
 const page = () => {
   return (
-    <div>
-      لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيْكَ لَهُ، لَهُ الْمُلْكُ
-      وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اَللَّهُمَّ لَا
+    <div className="bg-[#EBEEF2] p-12">
+      <Menu></Menu>
     </div>
   );
 };
