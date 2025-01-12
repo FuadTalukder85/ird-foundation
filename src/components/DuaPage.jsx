@@ -7,7 +7,7 @@ const DuaPage = () => {
   return (
     <div className="w-full">
       <DuaHeader></DuaHeader>
-      <div className="flex gap-8 justify-between mt-7">
+      <div className="flex gap-8 mt-7">
         <DuaContent></DuaContent>
         <Setting></Setting>
       </div>
