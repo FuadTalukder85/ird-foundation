@@ -3,6 +3,7 @@ import Image from "next/image";
 import search from "../../src/assets/icon/search.png";
 import cat01 from "../../src/assets/icon/cat01.png";
 import allah from "../../src/assets/icon/allah.png";
+import curveArrow from "../../src/assets/icon/curveArrow.png";
 import { useState, useEffect } from "react";
 
 const catData = [
@@ -22,6 +23,21 @@ const catData = [
           "Prophet (ﷺ) used to say after every compulsory prayer, The servant will ask his Lord for all of his religiously and worldly needs, because the treasure of all things is in the hands of Allah. Allah says (interpretation of the meaning): “And there is not a thing but that with Us are its depositories, and We do not send it down except according to a known measure.” (Sura Al-Hijr 15:21) No one can withhold what Allah gives; And, no one can give what he resists.",
         answer03:
           "The Prophet (ﷺ) said: The person who says the above statement 10 times It would be as if he had freed four of Ishmael's (As) children from slavery.",
+        arabic01: "",
+        arabic02:
+          "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيْكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اَللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ وَلَا مُعْطِيَ لِمَا مَنَعْتَ وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ",
+        arabic03:
+          "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+        transliteration01: "",
+        transliteration02:
+          "Laa ilaaha illallahu wahdahu laa sharika lahu, lahul-mulku wa lahul-hamdu wa huwa 'alaa kulli shay'in qadir. Allaahumma laa maani'a limaa a'taita wa laa mu'tia limaa mana'ta wa laa yanfa'u dhal-jaddi minka al-jaddu",
+        transliteration03:
+          "Laa ilahaa illAllahu wahdahu laa sharika lahu, lahul-mulku wa lahul-hamdu wa huwa 'alaa kulli shay'in qadir",
+        translation01: "",
+        translation02:
+          "There is none worthy of worship except Allah alone with no partner or associate. He is the Dominion and to Him be all praise, and He is able to do all things. O Allah, one can withhold what You have given and none can give what You have withheld, and no wealth or fortune can benefit anyone for from You comes all wealth and fortune.",
+        translation03:
+          "None has the right to be worshipped but Allah alone, Who has no partner. His is the dominion and His is the praise, and He is Able to do all things.",
         reference01: "Surah Al-Fatir 35:15",
         reference02: "Bukhari: 844",
         reference03: "Bukhari: 6404",
@@ -33,8 +49,11 @@ const catData = [
         question02: "Allah's guidance #2",
         answer01:
           "He whom Allah guides is the [rightly] guided, but he whom He leaves astray - never will you find for him a protecting guide. (Surah Al-Kahf 18:17)",
-        answer0:
+        answer02:
           "Guide me through that which there has been difference concerning the truth, verily, You are upon a straight path.",
+        arabic01:
+          "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيْكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اَللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ وَلَا مُعْطِيَ لِمَا مَنَعْتَ وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ",
+        arabic02: "",
         reference01: "Surah Al-Fatihah 1:5",
         reference02: "Muslim: 770",
       },
@@ -107,6 +126,7 @@ const catData = [
 
 const DuaContent = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [expandedSection, setExpandedSection] = useState(null); // To track which section is expanded
 
   useEffect(() => {
     // Retrieve the saved activeTab from localStorage on page load
@@ -141,6 +161,11 @@ const DuaContent = () => {
       });
     }
     return startIndex;
+  };
+
+  const toggleSection = (sectionId) => {
+    // Toggle the expanded section
+    setExpandedSection((prev) => (prev === sectionId ? null : sectionId));
   };
 
   return (
@@ -209,10 +234,40 @@ const DuaContent = () => {
                             handleScrollTo(item._id);
                           }}
                         >
-                          {item.section}
+                          <span
+                            className="cursor-pointer"
+                            onClick={() => toggleSection(item._id)} // Toggle section expand/collapse
+                          >
+                            {item.section}
+                          </span>
                         </a>
                       </p>
                     </div>
+                    {/* Show questions if section is expanded */}
+                    {expandedSection === item._id &&
+                      Object.entries(item).map(([key, value]) => {
+                        if (key.startsWith("question") && value) {
+                          return (
+                            <div
+                              key={key}
+                              className="bg-white px-5 py-3 text-sm"
+                            >
+                              <div className="flex items-center gap-2">
+                                <Image
+                                  src={curveArrow}
+                                  alt="curveArrow"
+                                  width={15}
+                                  height={15}
+                                ></Image>
+                                <span className="font-semibold text-green-600">
+                                  {value}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        }
+                        return null;
+                      })}
                   </div>
                 ))}
             </li>
@@ -239,11 +294,18 @@ const DuaContent = () => {
                           {item.section}
                         </span>
                       </h5>
-                      <div id={`${item._id}`} className="mt-3 rounded-lg mb-5">
+                      <div id={item._id} className="mt-3 rounded-lg mb-5">
                         <div className="mt-5">
                           {Object.entries(item).map(([key, value]) => {
                             if (key.startsWith("question") && value) {
                               const answerKey = `answer${key.slice(-2)}`;
+                              const arabicKey = `arabic${key.slice(-2)}`;
+                              const transliterationKey = `transliteration${key.slice(
+                                -2
+                              )}`;
+                              const translationKey = `translation${key.slice(
+                                -2
+                              )}`;
                               const referenceKey = `reference${key.slice(-2)}`;
 
                               return (
@@ -265,10 +327,29 @@ const DuaContent = () => {
                                   </div>
                                   {item[answerKey] && (
                                     <p className="text-gray-800 mt-2">
-                                      <span className="font-semibold text-green-600">
-                                        Answer:
-                                      </span>{" "}
+                                      <span className="font-semibold text-green-600"></span>{" "}
                                       {item[answerKey]}
+                                    </p>
+                                  )}
+                                  {item[arabicKey] && (
+                                    <p className="text-gray-800 mt-2 py-7 text-3xl text-right leading-10">
+                                      {item[arabicKey]}
+                                    </p>
+                                  )}
+                                  {item[transliterationKey] && (
+                                    <p className="text-gray-800 mt-2">
+                                      <span className="font-semibold text-[#393939] italic">
+                                        Transliteration:
+                                      </span>{" "}
+                                      {item[transliterationKey]}
+                                    </p>
+                                  )}
+                                  {item[translationKey] && (
+                                    <p className="text-gray-800 mt-2">
+                                      <span className="font-semibold text-[#393939] italic">
+                                        Translation:
+                                      </span>{" "}
+                                      {item[translationKey]}
                                     </p>
                                   )}
                                   {item[referenceKey] && (
@@ -276,7 +357,9 @@ const DuaContent = () => {
                                       <span className="font-semibold text-green-600">
                                         Reference:
                                       </span>{" "}
-                                      {item[referenceKey]}
+                                      <span className="block">
+                                        {item[referenceKey]}
+                                      </span>
                                     </p>
                                   )}
                                 </div>
