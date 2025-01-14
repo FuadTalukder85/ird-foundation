@@ -1,7 +1,9 @@
 "use client";
+import { useAddDuaMutation } from "@/redux/features/duaApi/DuaApi";
 import { useForm, useFieldArray } from "react-hook-form";
 
 const Form = () => {
+  const [addDua] = useAddDuaMutation();
   const {
     register,
     control,
@@ -40,6 +42,7 @@ const Form = () => {
   });
   const generateUniqueId = () =>
     `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
   const onSubmit = (data) => {
     const formattedData = {
       cat: data.cat,
@@ -61,20 +64,10 @@ const Form = () => {
 
     console.log(formattedData);
 
-    fetch(
-      "http://localhost:2025/api/add-dua",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formattedData),
-      },
-      reset()
-    )
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.error("Error:", error));
+    // Submit the data
+    addDua(formattedData).then(() => {
+      reset();
+    });
   };
 
   return (
