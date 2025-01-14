@@ -4,8 +4,10 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="bg-[#EBEEF2] h-screen px-8 py-6 flex gap-8">
-      <Menu></Menu>
+    <div className="bg-[#EBEEF2] h-screen md:px-8 md:py-6 flex gap-8">
+      <div className="hidden md:block">
+        <Menu></Menu>
+      </div>
       <DuaPage></DuaPage>
     </div>
   );

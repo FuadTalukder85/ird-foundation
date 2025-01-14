@@ -6,7 +6,7 @@ import appearance from "../assets/icon/appearance.png";
 
 const Setting = () => {
   return (
-    <div className="w-[330px] h-[780px] bg-white p-5 rounded-3xl">
+    <div className="hidden md:block w-[330px] h-[780px] bg-white p-5 rounded-3xl">
       <h3 className="text-[#393939] font-bold text-xl text-center">Setting</h3>
       <div className="mt-6">
         <ul className="space-y-3 text-[#868686] text-[16px]">

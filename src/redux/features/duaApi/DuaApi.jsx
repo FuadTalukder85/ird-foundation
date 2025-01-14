@@ -1,6 +1,7 @@
 import { baseApi } from "@/redux/baseApi/baseApi";
 
 const DuaApi = baseApi.injectEndpoints({
+  overrideExisting: true,
   endpoints: (builder) => ({
     addDua: builder.mutation({
       query: (addDua) => ({
@@ -11,8 +12,9 @@ const DuaApi = baseApi.injectEndpoints({
     }),
     getDua: builder.query({
       query: () => ({
-        url: "/api/add-dua",
+        url: "/api/get-dua",
         method: "GET",
+        cache: "force-cache",
       }),
     }),
   }),

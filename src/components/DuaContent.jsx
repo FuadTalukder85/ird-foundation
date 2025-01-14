@@ -48,14 +48,13 @@ const DuaContent = () => {
   };
 
   const toggleSection = (sectionId) => {
-    // Toggle the expanded section
     setExpandedSection((prev) => (prev === sectionId ? null : sectionId));
   };
 
   return (
     <div className="flex gap-8">
       {/* Sidebar */}
-      <div className="w-[430px] bg-white rounded-lg">
+      <div className="hidden md:block w-[430px] bg-white rounded-lg">
         <div className="bg-green-600 rounded-t-lg text-center py-3">
           <h5 className="text-white font-semibold text-lg">Categories</h5>
         </div>
@@ -69,7 +68,7 @@ const DuaContent = () => {
             <Image src={search} alt="search" width={20} height={20} />
           </div>
         </div>
-        <ul className="p-3 space-y-3">
+        <ul className="p-3 space-y-3 h-[660px] overflow-hidden overflow-y-scroll">
           {data?.map((tab, index) => (
             <li key={tab.cat} onClick={() => handleTabChange(index)}>
               <div
@@ -160,10 +159,9 @@ const DuaContent = () => {
       </div>
 
       {/* Content */}
-      <div className="w-[890px] h-[780px] overflow-hidden overflow-y-scroll">
+      <div className="md:w-[890px] h-[780px] overflow-hidden overflow-y-scroll">
         {data?.map((category, categoryIndex) => {
-          let questionCounter = calculateStartIndex(data, categoryIndex); // Calculate starting index for the category
-
+          let questionCounter = calculateStartIndex(data, categoryIndex);
           return (
             <div key={category.cat}>
               {categoryIndex === activeTab ||

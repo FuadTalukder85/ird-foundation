@@ -239,8 +239,7 @@ const SubcategoryQuestions = ({ subCatIndex, control, register }) => {
             <label className="block text-[#393939]">Reference</label>
             <input
               {...register(
-                `subCat.${subCatIndex}.questions.${questionIndex}.reference`,
-                { required: true }
+                `subCat.${subCatIndex}.questions.${questionIndex}.reference`
               )}
               placeholder="Enter Reference"
               className="px-5 py-2 border border-[#E2E2E2] rounded-md"
