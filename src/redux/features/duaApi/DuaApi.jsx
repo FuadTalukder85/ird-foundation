@@ -8,14 +8,12 @@ const DuaApi = baseApi.injectEndpoints({
         method: "POST",
         body: addDua,
       }),
-      providesTags: ["dua"],
     }),
     getDua: builder.query({
       query: () => ({
         url: "/api/add-dua",
         method: "GET",
       }),
-      providesTags: ["dua"],
     }),
   }),
 });

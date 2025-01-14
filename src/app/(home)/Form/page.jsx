@@ -196,8 +196,7 @@ const SubcategoryQuestions = ({ subCatIndex, control, register }) => {
             <textarea
               rows={1}
               {...register(
-                `subCat.${subCatIndex}.questions.${questionIndex}.answer`,
-                { required: true }
+                `subCat.${subCatIndex}.questions.${questionIndex}.answer`
               )}
               placeholder="Enter answer"
               className="px-5 py-2 border border-[#E2E2E2] rounded-md"
